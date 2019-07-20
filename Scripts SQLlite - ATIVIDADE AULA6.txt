@@ -1,0 +1,1180 @@
+SCRIPT SQLlite - ATIVIDADE AULA 7 [DB1 START 2019]
+
+=================================================================================================================================================================================//
+CREATE TABLE estado (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    uf VARCHAR(2) NOT NULL UNIQUE,
+    nome VARCHAR(50) NOT NULL
+)
+
+
+CREATE TABLE cidade (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
+    estado_id INTEGER NOT NULL
+    nome VARCHAR(50) NOT NULL
+    FOREIGN KEY cidade_fkindex1(estado_id) REFERENCES estado(id)
+)
+
+
+CREATE TABLE endereco (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    cidade_id INTEGER NOT NULL,
+    uf VARCHAR(2) NOT NULL,
+    logradouro VARCHAR(80) NOT NULL,
+    numero VARCHAR(5) NOT NULL,
+    complemento VARCHAR(20),
+    cep VARCHAR(10) NOT NULL,
+    FOREIGN KEY endereco_fkindex1(cidade_id) REFERENCES cidade(id)
+)
+
+
+CREATE TABLE pessoa (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(60) NOT NULL,
+    cpf VARCHAR(15) NOT NULL UNIQUE
+)
+
+
+CREATE TABLE pessoaEndereco (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    pessoa_id INTEGER NOT NULL,
+    endereco_id INTEGER NOT NULL,
+    FOREIGN KEY (pessoa_id) REFERENCES pessoa(id),
+    FOREIGN KEY (endereco_id) REFERENCES endereco(id)
+)
+
+
+CREATE TABLE usuario (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    pessoa_id INTEGER NOT NULL,
+    login VARCHAR(10) NOT NULL,
+    senha VARCHAR(25) NOT NULL,
+    papel VARCHAR(20) NOT NULL,
+    FOREIGN KEY (pessoa_id) REFERENCES pessoa(id)
+)
+
+
+CREATE TABLE recibo ( 
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    pessoa_id INTEGER NOT NULL,
+    cidade_id INTEGER NOT NULL,
+    emissor_id INTEGER NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    data_recibo DATE NOT NULL,
+    valor DOUBLE NOT NULL,
+    FOREIGN KEY (pessoa_id) REFERENCES pessoa(id),
+    FOREIGN KEY (cidade_id) REFERENCES cidade(id),
+    FOREIGN KEY (emissor_id) REFERENCES pessoa(id)
+)
+
+=================================================================================================================================================================================//
+- 1 -
+
+ID de 1 a 27
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'AC', 
+	'Acre');   
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'AL', 
+	'Alagoas');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'AP', 
+	'Amapá');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'AM', 
+	'Amazonas');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'BA', 
+	'Bahia');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'CE', 
+	'Ceará');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'DF', 
+	'Distrito Federal');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'ES', 
+	'Espírito Santo');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'GO', 
+	'Goiás');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'MA', 
+	'Maranhão');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'MT', 
+	'Mato Grosso');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'MS', 
+	'Mato Grosso do Sul');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'MG', 
+	'Minas Gerais');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'PA', 
+	'Pará');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'PB', 
+	'Paraíba');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'PR', 
+	'Paraná');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'PE', 
+	'Pernambuco');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'PI', 
+	'Piauí');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'RJ', 
+	'Rio de Janeiro');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'RN', 
+	'Rio Grande do Norte');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'RS', 
+	'Rio Grande do Sul');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'RO', 
+	'Rondônia');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'RR', 
+	'Roraima');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'SC', 
+	'Santa Catarina');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'SP', 
+	'São Paulo');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'SE', 
+	'Sergipe');
+
+INSERT INTO estado (
+	uf, 
+	nome) 
+VALUES (
+	'TO', 
+	'Tocantins');
+
+=================================================================================================================================================================================//
+- 2 -
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'24', 
+	'Chapecó');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'24', 
+	'Blumenau');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'24', 
+	'Joinville');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Curitiba');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Maringá');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Lunardeli');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Apucarana');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Santa Fé');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'São Miguel do Iguaçu');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Arapongas');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Ponta Grossa');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'16', 
+	'Jandaia do Sul');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	'25', 
+	'Ribeirão Preto');
+
+=================================================================================================================================================================================//
+- 3 -
+
+DELETE FROM 
+	estado 
+WHERE NOT EXISTS ( 
+	SELECT * FROM 
+		cidade 
+	WHERE 
+		cidade.estado_id = estado.id
+	)
+
+=================================================================================================================================================================================//
+- 4 -
+
+ID de 14 a 17
+INSERT INTO 
+	cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	25, 
+	'Campinas');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	25, 
+	'Jundiaí');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	25, 
+	'Piracicaba');
+
+INSERT INTO cidade (
+	estado_id, 
+	nome) 
+VALUES (
+	25, 
+	'São Paulo');
+
+=================================================================================================================================================================================//
+- 5 -
+
+UPDATE 
+	cidade 
+SET 
+	nome = 'Cidade Canção' 
+WHERE 
+	nome = 'Maringá';
+
+UPDATE 
+	cidade 
+SET 
+	nome = 'Jandaia' 
+WHERE 
+	nome = 'Jandaia do Sul';
+
+UPDATE 
+	cidade 
+SET 
+	nome = 'Lunardelli' 
+WHERE 
+	nome = 'Lunardeli';
+
+=================================================================================================================================================================================//
+- 6 -
+ 
+SELECT 
+	uf.uf AS Estados, 
+	cid.nome AS Cidades
+FROM 
+	cidade cid, 
+	estado uf 
+WHERE 
+	uf.id = cid.estado_id 
+ORDER BY 
+	Cidades, 
+	Estados
+
+=================================================================================================================================================================================//
+- 7 - 
+
+SELECT 
+	cid.estado_id,
+	estado.uf AS UF, 
+	count(cid.nome) AS quantidade_cidades 
+FROM 
+	cidade cid,
+	estado
+WHERE
+	estado.id = cid.estado_id
+GROUP BY 
+	cid.estado_id;
+
+=================================================================================================================================================================================//
+- 8 -
+
+ALTER TABLE 
+	endereco 
+ADD 
+	tipoEndereco VARCHAR(15);
+
+=================================================================================================================================================================================//
+- 9 -
+
+ID 1
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Maria',
+	'47839171915');     
+
+ID 2
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'João',
+	'77982489940');   
+
+ID 3
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Jeniffer',
+	'37164807973');  
+
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	4, 
+	'PR', 
+	'Rua 15 de Outubro', 
+	'5233', 
+	'casa', 
+	'06542-089', 
+	'RESIDENCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	7, 
+	'PR', 
+	'Rua Marechal Floriano', 
+	'5000', 
+	null, 
+	'86802-290', 
+	'RESIDENCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	8, 
+	'PR', 
+	'Rua Curitiba 307', 
+	'5566', 
+	null, 
+	'86770-970', 
+	'RESIDENCIAL');
+
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	10, 
+	'PR', 
+	'Rua Vulturina', 
+	'4500', 
+	null, 
+	'86705-490', 
+	'COMERCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 	
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	11, 
+	'PR', 
+	'Rua 
+	José de Oliveira Franco', 
+	'4666', 
+	null, 
+	'84062-300', 
+	'COMERCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	9, 
+	'PR', 
+	'Rua José Maria de Paula Rodrigues 952', 
+	'4486', 
+	null, 
+	'86900-970', 
+	'COMERCIAL');
+
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	1, 
+	1);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	1, 
+	4); 
+
+
+INSERT INTO PessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	2, 
+	2);
+
+INSERT INTO PessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	2, 
+	5);
+
+
+INSERT INTO PessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	3, 
+	3);
+
+INSERT INTO PessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	3, 
+	6);
+
+=================================================================================================================================================================================//
+- 10 - 
+
+ID 4
+INSERT INTO 
+	pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Luís', 
+	'26845561800');   
+
+ID 5
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Samara', 
+	'60767737822');
+
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	13, 
+	'SP', 
+	'Rua Paulo Engracia de Oliveira', 
+	'45', 
+	null, 
+	'14079-046', 
+	'RESIDENCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	13, 
+	'SP', 
+	'Rua Itapicuru', 
+	'700', 
+	'apto.200', 
+	'14060-632', 
+	'COMERCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	16, 
+	'SP', 
+	'Rua Doutor Theodureto de Camargo', 
+	'870', 
+	null, 
+	'13402-259', 
+	'RESIDENCIAL');
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	15, 
+	'SP', 
+	'Rua Cláudio Manuel da Costa', 
+	'450', 
+	null, 
+	'13206-600', 
+	'COMERCIAL');
+
+
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	4, 
+	7);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	4, 
+	8);
+
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	5, 
+	9);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	5, 
+	10);
+
+=================================================================================================================================================================================//
+- 11 -
+
+ID 6
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Daniel', 
+	'22448565937');  
+
+ID 7
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES ('Peterson', 
+	'23911071965');
+
+
+INSERT INTO endereco (
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	1, 
+	'SC', 
+	'Rua Berlim', 
+	'1000', 
+	null, 
+	'89805-342', 
+	'COMERCIAL');
+
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	2, 
+	'SC', 
+	'Rua Clara Sasse', 
+	'995', 
+	null, 
+	'89060-050', 
+	'COMERCIAL');
+
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	6, 
+	11);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	7, 
+	12);
+
+=================================================================================================================================================================================//
+- 12 - 
+
+//Obs.: No SQL Tryit Editor, os campos p.nome, cid.nome e uf.nome não apresentaram na visualização,
+em vez disso, misturou dados desses campos. Acredito que seja porque os campos tem o mesmo nome. 
+
+SELECT
+	p.nome AS nome_pessoa, 
+	end.logradouro, 
+	end.numero, 
+	end.complemento, 
+	end.cep, 
+	end.tipoEndereco, 
+	cid.nome AS nome_cidade, 
+	uf.nome AS nome_estado, 
+	uf.uf 
+FROM 
+	pessoa p,
+	pessoaEndereco pend, 
+	endereco end, 
+	cidade cid, 
+	estado uf
+WHERE 
+	pend.pessoa_id = p.id AND
+	pend.endereco_id = end.id AND
+	end.cidade_id = cid.id AND
+	cid.estado_id = uf.id
+ORDER BY 
+	nome_pessoa,
+	nome_cidade,
+	nome_estado
+
+=================================================================================================================================================================================//
+- 13 -
+
+DELETE FROM 
+	pessoa, 
+	pessoaEndereco
+WHERE EXISTS (
+	SELECT * FROM 
+		endereco end, 
+		cidade cid 
+	WHERE
+		pessoa.id = pessoaEndereco.pessoa_id AND
+		pessoaEndereco.endereco_id = end.id AND
+ 		end.cidade_id = cid.id AND
+ 		cid.nome = 'Ribeirão Preto'
+ 	)
+
+=================================================================================================================================================================================//
+- 14 - 
+
+UPDATE
+	endereco 
+SET
+	cep = '00000-000';
+
+=================================================================================================================================================================================//
+- 15 -
+
+//Registrando clientes e emitentes
+
+INSERT INTO pessoa (
+	nome,
+	cpf) 
+VALUES (
+	'Fusca', 
+	'68998288982');
+
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'Tamara', 
+	'14254114958');
+
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'DB1', 
+	'69353561000170');
+
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'FCV', 
+	'97508325000111');
+
+INSERT INTO pessoa (
+	nome, 
+	cpf) 
+VALUES (
+	'USP', 
+	'16718172000135');
+
+
+//Registrando endereços de clientes e emitentes
+
+// FUSCA - CURITIBA/PR 
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	4, 
+	'PR', 
+	'Rua Emília Chopacz', 
+	'200', 
+	null, 
+	'81270-320', 
+	'RESIDENCIAL');
+
+// TAMARA - MARINGÁ/PR
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	5, 
+	'PR', 
+	'Rua Manoel da Costa', 
+	'7400', 
+	null, 
+	'87043-495', 
+	'RESIDENCIAL');
+
+// DB1 - MARINGÁ/PR
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	5, 
+	'PR', 
+	'Av. Advogado Horácio Raccanello Filho', 
+	'5410', 
+	'Novo Centro', 
+	'87020-035', 
+	'COMERCIAL');
+
+// FCV - MARINGÁ/PR
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	5, 
+	'PR', 
+	'Av. Advogado Horácio Raccanello Filho', 
+	'5950', 
+	'Zona 7', 
+	'87020-035', 
+	'COMERCIAL');
+
+// USP - SÃO PAULO/SP
+INSERT INTO endereco(
+	cidade_id, 
+	uf, 
+	logradouro, 
+	numero, 
+	complemento, 
+	cep, 
+	tipoEndereco) 
+VALUES (
+	17, 
+	'SP', 
+	'Av. Prof. Luciano Gualberto', 
+	'158', 
+	null, 
+	'05508-900', 
+	'COMERCIAL');
+
+//Relacionando clientes e emitentes com seus respectivos endereços
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	8, 
+	14);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	9, 
+	15);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	10, 
+	13);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	11, 
+	16);
+
+INSERT INTO pessoaEndereco (
+	pessoa_id, 
+	endereco_id) 
+VALUES (
+	12, 
+	17);
+
+
+INSERT INTO recibo (
+	pessoa_id, 
+	cidade_id, 
+	emissor_id, 
+	descricao, 
+	valor, 
+	data_recibo)
+VALUES ( 
+	8, 
+	4, 
+	10,
+	'Serviço: Implantação de software', 
+	1500.00,
+	'2019-07-16');
+
+INSERT INTO recibo (
+	pessoa_id, 
+	cidade_id, 
+	emissor_id, 
+	descricao, 
+	valor, 
+	data_recibo) 
+VALUES ( 
+	9, 
+	5, 
+	10,
+	'Venda: Software de cadastros de currículos', 
+	25000.00,
+	'2019-05-20');
+
+=================================================================================================================================================================================//
+- 16 -
+
+INSERT INTO 
+	recibo (
+	pessoa_id, 
+	cidade_id, 
+	emissor_id, 
+	descricao, 
+	valor, 
+	data_recibo) 
+VALUES (
+	8, 
+	4, 
+	11,
+	'Serviço: Patrocínio em eventos', 
+	50000.00,
+	'2019-02-15');
+
+INSERT INTO 
+	recibo (
+	pessoa_id, 
+	cidade_id, 
+	emissor_id, 
+	descricao, 
+	valor, 
+	data_recibo) 
+VALUES ( 
+	9, 
+	5, 
+	12,
+	'Serviço: Feira de Profissões', 
+	2000.00,
+	'2019-04-09');
+
+=================================================================================================================================================================================//
+- 17 -
+
+SELECT 
+	rec.id AS numero_recibo,
+	rec.data_recibo AS data,
+	rec.valor AS valor_recibo, 
+	client.nome AS cliente,
+	uf_client.uf AS estado_cliente,
+	emitent.nome AS emitente,
+	uf_emitent.uf AS estado_emitente
+FROM 
+	recibo rec, 
+	pessoa client, 
+    	pessoaEndereco pend_client, 
+    	endereco end_client,
+	cidade cid_client, 
+	estado uf_client, 
+  	pessoa emitent, 
+    	pessoaEndereco pend_emitent, 
+    	endereco end_emitent, 
+    	cidade cid_emitent, 
+    	estado uf_emitent 
+WHERE 
+	rec.pessoa_id = client.id AND 
+    	pend_client.pessoa_id = client.id AND
+	pend_client.endereco_id = end_client.id AND 
+	rec.cidade_id = cid_client.id AND
+    	cid_client.estado_id = uf_client.id AND 
+	end_client.tipoEndereco = 'RESIDENCIAL' AND
+    	rec.emissor_id = emitent.id AND
+    	emitent.id = pend_emitent.pessoa_id AND
+    	pend_emitent.endereco_id = end_emitent.id AND
+	rec.cidade_id = cid_emitent.id AND
+	cid_emitent.estado_id = uf_emitent.id AND
+    	end_emitent.tipoEndereco = 'COMERCIAL'
+ORDER BY 
+	data,
+	cliente,
+	emitente
+
+=================================================================================================================================================================================//
+- 18 -
+
+SELECT
+	uf.uf AS estado, 
+	count(rec.id) AS quantidade_recibos_emitidos, 
+    	sum(rec.valor) AS valor_total_recibos
+FROM
+	recibo rec, 
+    	cidade cid, 
+    	estado uf 
+WHERE
+	rec.cidade_id = cid.id AND
+    	cid.estado_id = uf.id AND
+    	uf.uf = 'PR'
+GROUP BY
+	uf.uf 
+     
